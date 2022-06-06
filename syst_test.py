@@ -5,11 +5,12 @@ import threading
 import subprocess
 import snowboydecoder
 import signal
+import conf_
 
 def jtalk(t):
     open_jtalk=['open_jtalk']
-    mech=['-x','/var/lib/mecab/dic/open-jtalk/naist-jdic']
-    htsvoice=['-m','/home/rkn/Projects/jtalk/htsvoice_files/Miku-Type-b.htsvoice']
+    mech=['-x',conf_.mech]
+    htsvoice=['-m',conf_.htsvoice]
     speed=['-r','0.9']
     outwav=['-ow','open_jtalk.wav']
     cmd=open_jtalk+mech+htsvoice+speed+outwav
@@ -58,7 +59,7 @@ def talk_mode(gri,vr,fnc):
 
     signal.signal(signal.SIGINT, signal_handler)
 
-    detector = snowboydecoder.HotwordDetector("/home/rkn/Softwares/snowboy/snowboy/examples/Python3/resources/models/computer.umdl", sensitivity=0.5)
+    detector = snowboydecoder.HotwordDetector(conf_.detector_path, sensitivity=0.5)
     
     flag=True
     while True:
@@ -90,7 +91,7 @@ def console_mode(gri,vr,fnc):
                         fnc.greeting(result,mode="console")
 
 if __name__=="__main__":
-    gri=GRI.GuessReferenceIntention("/home/rkn/Projects/pi_interact/talk_template_data")
+    gri=GRI.GuessReferenceIntention(conf_.talk_temp_path)
     vr=GRI.VoiceRecognize()
     fnc=functions.Functions()
 

@@ -3,6 +3,7 @@ import subprocess
 import json
 from urllib import request
 import random
+import conf_
 
 class Functions:
     def __init__(self) -> None:
@@ -10,8 +11,8 @@ class Functions:
 
     def jtalk(self,t):
         open_jtalk=['open_jtalk']
-        mech=['-x','/var/lib/mecab/dic/open-jtalk/naist-jdic']
-        htsvoice=['-m','/home/rkn/Projects/jtalk/htsvoice_files/Miku-Type-b.htsvoice']
+        mech=['-x',conf_.mech]
+        htsvoice=['-m',conf_.htsvoice]
         speed=['-r','0.9']
         outwav=['-ow','open_jtalk.wav']
         cmd=open_jtalk+mech+htsvoice+speed+outwav

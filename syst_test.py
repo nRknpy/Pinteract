@@ -101,3 +101,5 @@ if __name__=="__main__":
         talk_mode(gri,vr,fnc)
     elif mode=="c":
         console_mode(gri,vr,fnc)
+    else:
+        print("error")
